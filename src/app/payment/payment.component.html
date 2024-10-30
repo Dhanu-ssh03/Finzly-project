@@ -1,0 +1,116 @@
+<div class="container-fluid bg-primary-subtle" >
+    <div class="container border border-2 border-light">
+        <div class="row bg-light d-flex justify-content-between p-3 sticky-top">
+            <div class="col-12 col-md-6 d-flex">
+                <button class="btn btn-dark" style="height: 45px;" (click)="todashboard()">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="background-color:white;" viewBox="0 0 16 16" width="16" height="13">
+                        <path d="M6.78 1.97a.75.75 0 0 1 0 1.06L3.81 6h6.44A4.75 4.75 0 0 1 15 10.75v2.5a.75.75 0 0 1-1.5 0v-2.5a3.25 3.25 0 0 0-3.25-3.25H3.81l2.97 2.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L1.47 7.28a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"></path>
+                    </svg>
+                </button>
+                <h3 class="ms-3">BBC-Bharat Biji Corporation</h3>
+            </div>
+
+            <div class="col-12 col-md-4 d-flex">
+                <input class="form-control me-1" type="search" [(ngModel)]="searchTerm" placeholder="Search" style="height: 40px;">
+            </div>
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-12 table-responsive">
+                <table class="table table-striped text-center">
+                    <thead>
+                        <tr>
+                            <th>Cus_Id</th>
+                            <th>Cus_Name</th>
+                            <th>UnitConsumed</th>
+                            <th>BillStartDate</th>
+                            <th>BillEndDate</th>
+                            <th>DueDate</th>
+                            <th>DueAmount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let bill of filteredPaymentData; let i=index">
+                            <td>{{ bill.customer.customerId }}</td>
+                            <td>{{ bill.customer.customerName }}</td>
+                            <td>{{ bill.unitConsumption }}</td>
+                            <td>{{ bill.billingStartDate | date: 'dd/MM/yyyy' }}</td>
+                            <td>{{ bill.billingEndDate | date: 'dd/MM/yyyy' }}</td>
+                            <td>{{ bill.billDueDate | date: 'dd/MM/yyyy' }}</td>
+                            <td>{{( bill.amountDue | currency : "INR")}}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary w-100 p-1" data-bs-toggle="modal" data-bs-target="#exampleModalLong" (click)="payIndex(i)">
+                                    Pay
+                                </button>
+
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+                
+  
+        
+            <div  class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" >
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Payment Confirmation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            ARE YOU SURE TO PAID AMOUNT..?
+                        </div>
+                        <div class="modal-footer" style="border: 0;">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="showSpinner()">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        
+        
+
+       
+        
+        <div class="spinner-overlay" *ngIf="showSpinnerLoader">
+            <div class="spinner">
+                <div class="spinner-border ms-5" style="width: 3rem; height: 3rem;" role="status">
+                    
+                </div>
+                <b class="text-white ms-3 mb-3">Processing your payment...</b>
+            </div>
+        </div> 
+
+        <div id="successModal" *ngIf="showSuccessModalFlag">
+            <div class="modalcontent">
+                <img src="assets/images/tic.jpg" alt="no logo" height="40" width="40">
+                <h3>Payment Successful!</h3>
+                <h5>How would you like to receive your invoice?</h5>
+                <div class="d-flex justify-content-around">
+                    <button class="btn btn-danger" (click)="closeSuccessModal()">Close</button>
+                    <button class="btn btn-success" (click)="invoiceMail()">Email</button>
+                    <button class="btn btn-primary" (click)="generateInvoice()">PDF</button>
+                </div>
+               
+
+            </div>
+        </div>
+        <div class="spinner-overlay" *ngIf="showLoader">
+            <div class="spinner">
+                <div class="spinner-border ms-5" style="width: 3rem; height: 3rem;" role="status">
+                    
+                </div>
+                <b class="text-white ms-3 mb-3">L o a d i n g D a t a...</b>
+            </div>
+        </div> 
+                        
+
+       
+        
+    </div>
+</div>

@@ -1,0 +1,54 @@
+.btn1{
+    width:80px;
+    height: 35px;
+}
+
+
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100; 
+}
+#successModal {
+    display: flex; /* Use flex to center the modal */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark background */
+    justify-content: center; /* Center modal horizontally */
+    align-items: center; /* Center modal vertically */
+    z-index: 1200; /* Ensure it's above other content */
+}
+
+/* Modal Content */
+.modalcontent {
+    background: white; /* White background for modal */
+    padding: 20px; /* Add padding around the content */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center; /* Center text */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    width: 50%;
+    
+}
+
+/* Button Styles */
+.btn1 {
+    width: 80px; /* Button width */
+    height: 35px; /* Button height */
+    background-color: #007bff; /* Bootstrap primary color */
+   
+    
+}
+/* Button Hover Effect */
+.btn1:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}

@@ -1,0 +1,25 @@
+.common div{
+    border-radius: 10%;
+    transition: 0.2s ease-in;
+    overflow: hidden;
+}
+
+.common div:hover{
+    transform: scale(1.05);
+}
+
+.dashboard-nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-title{
+    font-family: "poppins";
+    margin-left: 2%;
+    font-size: 30px;
+}
+.img1{
+    width: 240px;
+}

@@ -1,0 +1,52 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 bg-primary text-white d-flex align-items-center">
+      <img src="assets/images/bbc-1.svg " style="border-radius: 10px;" alt="no logo" height="40" width="40" class="me-2">
+      <h5 class="mt-3">BBC-Bharat Biji Corporation</h5>
+    </div>
+  </div>
+
+  <div class="row" style="height: 80vh;">
+   
+    <div class="d-none d-md-block col-md-6  justify-content-center align-items-center">
+      <img src="assets/images/login.png">
+    </div>
+
+    
+    
+    <div class="col-12 col-md-6 d-flex justify-content-center">
+      <div class="form mt-5 w-50 p-3" style="height: 100%; max-height: 75vh;">
+
+        <div class="text-center">
+          <img src="assets/images/profile1.png" height="150" width="150" alt="Profile Image" class="mb-3">
+        </div>
+       
+
+        <form #loginForm="ngForm" >
+          <div class="input-group mt-3">
+            <input  type="text"  class="form-control"  placeholder="Employee ID"  [(ngModel)]="empId"  name="empId"  required pattern="^(EMP|emp)\d+$" (focus)="clearAlert()">
+            <button class="input-group-text" [disabled]="isOtpButton" [ngStyle]="{ backgroundColor: isOtpButton ? 'darkgrey' : 'white' }" (click)="loginValidation(loginForm)">
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+           
+          </div>
+        
+          <div class="mt-3" style="height: 70px;">
+            <input  type="text"  class="form-control"  placeholder="Enter OTP"  [(ngModel)]="enteredOtp"  name="enteredOtp"  [disabled]="otpInputVisible"  required>
+          </div>
+        
+          <div class="text-center">
+            <button class="btn btn-primary w-100 rounded-0" [disabled]="otpInputVisible" (click)="otpValidate()">
+              Login
+            </button>
+          </div>
+        </form>
+        
+        <div *ngIf="alertVisible" class="alert alert-danger p-1 mt-3" [ngStyle]="{backgroundColor:otpAlertColor,border:otpAlertBorder}" role="alert">
+          <i class="fa-solid fa-circle-exclamation "[ngStyle]="{color:alertIconColor}"></i><span [ngStyle]="{color:alertTextColor}">&nbsp;{{error}}</span>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

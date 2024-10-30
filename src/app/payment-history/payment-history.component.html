@@ -1,0 +1,54 @@
+<div class="transaction-container">
+    <div class="d-flex justify-content-between">
+        <button class="btn btn-primary mb-2 btn-style" (click)="todashboard()">DashBoard <i class="fas fa-home"></i></button>
+        <h2>All Transactions</h2>
+        <input class=" search form-control " type="search" [(ngModel)]="searchTerm" (keyup)="search()" placeholder="Search" style="height: 40px;">
+    </div>
+
+    <table class="transaction-table" *ngIf="filteredDetails.length > 0">
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Bill ID</th>
+                <th>customerName</th>
+                <th>Payment Date</th>
+                <th>Payment Method</th>
+                <th>Payment Status</th>
+                <th>Amount</th>
+                <th>Discount</th>
+                <th>Net Amount</th>
+                <th>Invoice</th>
+            </tr>   
+        </thead>
+        <tbody>
+            <tr *ngFor="let transaction of PaginatedDetails;let i=index">
+                <td>{{ transaction.paymentId }}</td>
+                <td>{{ transaction.bill.billId }}</td>
+                <td>{{transaction.bill.customer.customerName}}</td>
+                <td>{{ transaction.paymentDate }}</td>
+                <td>{{ transaction.paymentMethod }}</td>
+                <td>{{ transaction.paymentStatus }}</td>
+                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.discount | number: '1.2-2' }}</td>
+                <td>{{ transaction.netAmount }}</td>
+                
+                <td><button class="btn btn-secondary" (click)="generateInvoice(i)">download</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+</div>
+ <div class="spinner-overlay" *ngIf="showSpinner">
+    <div class="spinner d-flex">
+        <div class="spinner-border text-primary ms-5" style="width: 3rem; height: 3rem;" role="status">
+            
+        </div>
+        <h6 class="text-primary ms-3 mt-4">L o a d i n g. . . .</h6> 
+    </div>
+</div>  
+
